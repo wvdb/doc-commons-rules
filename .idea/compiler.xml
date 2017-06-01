@@ -17,6 +17,16 @@
       <profile default="true" name="Default" enabled="true">
         <processorPath useClasspath="true" />
       </profile>
+      <profile default="false" name="Annotation profile for poc-commons-rules" enabled="true">
+        <sourceOutputDir name="target\generated-sources\annotations" />
+        <sourceTestOutputDir name="target\generated-test-sources\test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="poc-commons-rules" />
+      </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="poc-commons-rules" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

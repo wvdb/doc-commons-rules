@@ -1,5 +1,8 @@
 package be.telenet.commons_rules.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
@@ -8,12 +11,13 @@ import java.util.Map;
 
 public class BeanWrapper {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanWrapper.class);
+
 	private Object bean = null;
 	private Class<?> clazz = null;
 	private Method[] methods = null;
 	
 	public BeanWrapper (Object bean) {
-		
 		this.bean = bean;
 		this.clazz = bean.getClass();
 		
@@ -21,37 +25,31 @@ public class BeanWrapper {
 	}
 	
 	public Object getBean () {
-		
 		return bean;
 	}
 	
 	@SuppressWarnings("rawtypes")
 	public Object getPropertyValue (String name) throws Exception {
-		
+		// take first part of property (example: stb.attributeswithdescription.Head of household -> stb)
 		String[] parts = name.split("\\.", 2);
 		String property = parts[0];
 		
 		Object value = null;
 		
 		if (bean instanceof Map) {
-			
 			value = ((Map) bean).get(property);
-			
 		} else {
-		
 			for (Method method : methods) {
 				
 				if (method.getParameterCount() > 0)
 					continue;
 				
-				String methodName = method.getName().toLowerCase();
-				
-				if (methodName.equals("get" + property) || methodName.equals("is" + property)) {
-					
-					value = method.invoke(bean);
-					
-					//System.out.println(String.format("method=%s,value=%s", methodName, value));
+//				String methodName = method.getName().toLowerCase();
+				String methodName = method.getName();
 
+				if (methodName.equals("get" + property) || methodName.equals("is" + property)) {
+					value = method.invoke(bean);
+					LOGGER.debug(String.format("method=%s,value=%s", methodName, value));
 					break;
 				}
 				
