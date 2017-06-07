@@ -30,7 +30,8 @@ public class BeanWrapper {
 	
 	@SuppressWarnings("rawtypes")
 	public Object getPropertyValue (String name) throws Exception {
-		// take first part of property (example: stb.attributeswithdescription.Head of household -> stb)
+		// take first part of property
+        // (example1: stb.AttributesWithDescription.Head of household -> stb)
 		String[] parts = name.split("\\.", 2);
 		String property = parts[0];
 		
@@ -44,7 +45,6 @@ public class BeanWrapper {
 				if (method.getParameterCount() > 0)
 					continue;
 				
-//				String methodName = method.getName().toLowerCase();
 				String methodName = method.getName();
 
 				if (methodName.equals("get" + property) || methodName.equals("is" + property)) {

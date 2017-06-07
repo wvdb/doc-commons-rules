@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>be.telenet</groupId>
+	<groupId>be.telenet.tveng</groupId>
 	<artifactId>commons-rules</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.1</version>
 	<name>Rule Engine</name>
 	<description>Simple Rule Engine</description>
 
